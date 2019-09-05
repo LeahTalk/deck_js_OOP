@@ -1,101 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <title>Deck of Cards</title>
-   </head>
+      <head>
+         <title>BlackJack</title>
+         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+         <!-- Latest compiled and minified JavaScript -->
+         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+         <link rel="stylesheet" type="text/css" href="style.css">
+         <script src = "blackjack.js"></script>s
+      </head>
    <body>
-      <script>
-         class Card {
-            constructor(suit, value) {
-               this.suit = suit;
-               this.value = value;
-            }
-            show() {
-               var card_vals = {
-                  '1' : 'Ace',
-                  '2' : '2',
-                  '3' : '3',
-                  '4' : '4',
-                  '5' : '5',
-                  '6' : '6',
-                  '7' : '7',
-                  '8' : '8',
-                  '9' : '9',
-                  '10' : '10',
-                  '11' : 'Jack',
-                  '12' : 'Queen',
-                  '13' : 'King'
-               };
-               console.log(`${card_vals[this.value.toString()]} of ${this.suit}`);
-            }
-         }
-
-         class Deck {
-            constructor() {
-               this.cards = [];
-               this.reset_deck();
-            }
-            shuffle() {
-               for(let i = 0; i < 52; i++) {
-                  let randomIndex = Math.floor(Math.random() * 52);
-                  let temp = this.cards[i];
-                  this.cards[i] = this.cards[randomIndex];
-                  this.cards[randomIndex] = temp;
-               }
-            }
-            reset_deck(){
-               var suits = ['Spades', 'Clubs', 'Diamonds', 'Hearts'];
-               var values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-               this.cards = [];
-               for(var value of values) {
-                  for(var suit of suits) {
-                     var card = new Card(suit, value);
-                     this.cards.push(card);
-                  }
-               }
-            }
-            deal() {
-               if(this.cards.length == 0) {
-                  console.log("There are no cards left to deal!");
-               }
-               var card = this.cards.pop();
-               return card;
-            }
-         }
-
-         class Player {
-            constructor(name) {
-               this.name;
-               this.hand = [];
-            }
-
-            draw(deck) {
-               var card = deck.deal();
-               this.hand.push(card)
-            }
-
-            discard(index) {
-               if(this.hand.length <= index) {
-                  console.log("The player does not have this many cards!");
-               }
-            }
-
-            showHand() {
-               for(var card of this.hand) {
-                  card.show();
-               }
-            }
-         }
-
-         var myDeck = new Deck();
-         myDeck.shuffle();
-         var player1 = new Player('Leah');
-         for(let i = 0; i < 5; i ++) {
-            player1.draw(myDeck);
-         }
-         player1.showHand();
-
-      </script>
-
+      <div class = 'wrapper'>
+         <div class = 'col'>
+            <div class = 'dealerSection'>
+               <h1 style = 'color: white'>Dealer's Cards</h1>
+               <div class = 'row dealerCards'>
+               </div>
+            </div>
+            <div>
+            </div>
+            <div class = 'playerSection'>
+               <h1 style = 'color: white'>Your Cards</h1>
+               <div class = 'row playerCards'>
+               </div>
+            </div>
+         </div>
+         <div class = 'col buttonSection'>
+            <button class = 'btn btn-primary hit'>Hit me!</button>
+            <button class = 'btn btn-primary stand'>Stand</button>
+            <button class = 'btn btn-primary playAgain'>Play Again!</button>
+         </div>
+      </div>
    </body>
 </html>
